@@ -2,16 +2,20 @@
 import sys
 
 for line in sys.stdin:
-    fields = line.strip().split(",")
-
-    # Defensive check (optional but good)
-    if len(fields) < 5:
+    line = line.strip()
+    if not line:
         continue
 
-    region = fields[0]
-    days = float(fields[1])
-    rainfall = float(fields[2])
-    temp = float(fields[3])
-    yield_val = float(fields[4])
+    fields = line.split(",")
 
-    print(f"{region}\t{days},{rainfall},{temp},{yield_val},1")
+    try:
+        key = fields[1].strip()          # example: soil type (Sandy/Clay/Loam)
+        days = float(fields[8])          # days_to_harvest
+        rain = float(fields[9])          # rainfall
+        temp = float(fields[4])          # temperature  (CHANGE if needed)
+        yld  = float(fields[3])          # yield
+        c    = 1.0                       # count
+    except:
+        continue
+
+    print(f"{key}\t{days},{rain},{temp},{yld},{c}")
